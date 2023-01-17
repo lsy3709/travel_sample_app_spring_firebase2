@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.and4.travel_server.mapper.DiaryMapper">
+	
+	<!-- 내일기 클릭 -->
+	<select id="doGetDiaryList" resultType="com.and4.travel_server.model.Diary">
+		select * from diary where on_off='비공개'
+	</select>
+	<!-- 여행다이어리목록 -->
+	<select id="doGetTripDiaryList" resultType="com.and4.travel_server.model.Diary">
+		select * from diary where on_off='공개'
+	</select>
+	
+	<delete id="deleteDiaryList">
+		delete from diary
+		where dno=#{dno}
+	</delete>
+	<!-- 일기작성 -->
+	<insert id="insertDiary">
+		insert into diary(title,content,date,on_off)
+		values(#{title},#{content},#{date},#{on_off})
+	</insert>
+	
+	
+	<select id="getDiary" resultType="com.and4.travel_server.model.Diary">
+		select * from diary where dno=#{dno}
+	</select>
+	
+	
+
+</mapper>
