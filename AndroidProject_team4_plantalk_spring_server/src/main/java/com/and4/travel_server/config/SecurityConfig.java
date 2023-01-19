@@ -56,8 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // SessionCreationPolicy.STATELESS     - 스프링시큐리티가 생성하지도않고 기존것을 사용하지도 않음        ->JWT 같은토큰방식을 쓸때 사용하는 설정 
 		.and()
 		.httpBasic().disable() //사용자 인증방법으로는 HTTP Basic Authentication을 사용 안한다.
-		.addFilter(new JwtAuthenticationFilter(authenticationManager()))
-		.addFilter(new JwtAuthorizationFilter(authenticationManager(), userService))
+		.addFilter(new JwtAuthenticationFilter(authenticationManager()))  // JwtAutienticationFilter : jwt를 사용해서 인증 처리
+		.addFilter(new JwtAuthorizationFilter(authenticationManager(), userService)) // JwtAutiorizationFilter : jwt를 사용해서 인가 처리
 		.authorizeRequests()
 		.antMatchers("/api/user/**") 	// 스프링 시큐리티 룰을 무시하게 하는 Url 규칙(여기 등록하면 규칙 적용하지 않음)
 			.access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") //ROLE_USER, ROLE_MANAGER, ROLE_ADMIN이라는 롤을 가진 사용자만 접근 허용
