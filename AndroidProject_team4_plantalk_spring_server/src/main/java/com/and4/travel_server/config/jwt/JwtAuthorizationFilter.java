@@ -24,39 +24,43 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 	@Autowired
 	private UserService userService;
-	
+
 	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserService userService) {
 		super(authenticationManager);
 		this.userService = userService;
 	}
-	
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		//   암호화 키
+		//	   String SECRET = "빅데이터5기";
+		// 	토큰 만료시간 단위 :  ms 
+		//		int EXPIRATION_TIME = 86400000;
+		//		String TOKEN_PREFIX = "Bearer ";
+		//		String HEADER_STRING = "Authorization";
 		String header = request.getHeader(JwtProperties.HEADER_STRING);
-		System.out.println(header+"__header부분_____JwtAuthorizationFilter__________");
-		if(header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
+		System.out.println(header + "__header부분_____JwtAuthorizationFilter__________");
+		if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
 			chain.doFilter(request, response);
 			return;
 		}
-		System.out.println("header: "+header);
-		String token = request.getHeader(JwtProperties.HEADER_STRING)
-				.replace(JwtProperties.TOKEN_PREFIX, "");
-		
+		System.out.println("header: " + header);
+		String token = request.getHeader(JwtProperties.HEADER_STRING).replace(JwtProperties.TOKEN_PREFIX, "");
+
 		String username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(token)
 				.getClaim("username").asString();
-		
-		if(username != null) {
+
+		if (username != null) {
 			User user = userService.doGetOneUser(username);
-			
+
 			PrincipalDetails principalDetails = new PrincipalDetails(user);
-			Authentication authentication =
-					new UsernamePasswordAuthenticationToken(
-							principalDetails, null, principalDetails.getAuthorities());
-			
+			Authentication authentication = new UsernamePasswordAuthenticationToken(principalDetails, null,
+					principalDetails.getAuthorities());
+
 			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
-		
+
 		chain.doFilter(request, response);
 	}
 }
