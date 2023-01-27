@@ -32,6 +32,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		System.out.println("JwtAuthenticationFilter: 진입");
+		System.out.println("저장확인");
 		
 		ObjectMapper om = new ObjectMapper();
 		LoginRequestDto loginRequestDto = null;
