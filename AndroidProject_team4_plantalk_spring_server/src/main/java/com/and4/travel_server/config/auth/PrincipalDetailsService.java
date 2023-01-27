@@ -19,10 +19,12 @@ public class PrincipalDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		System.out.println("PrincipalDetailsService: 진입");
+		System.out.println("PrincipalDetailsService: 진입  --리턴타입: UserDetails ====loadUserByUsername호출==");
 		
+		// username 디비에서 불러오기.
 		User user = userService.doGetOneUser(username);
 		
+		// PrincipalDetails 객체 에 해당 유저 넣기.
 		return new PrincipalDetails(user);
 	}
 

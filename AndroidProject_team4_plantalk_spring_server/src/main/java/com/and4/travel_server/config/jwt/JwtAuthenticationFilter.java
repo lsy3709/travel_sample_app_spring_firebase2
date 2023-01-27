@@ -37,24 +37,31 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		LoginRequestDto loginRequestDto = null;
 		
 		try {
+			//Convert "JSON" to "Java Object"
 			loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println("JwtAuthenticationFilter: "+loginRequestDto);
+		System.out.println("JwtAuthenticationFilter:  loginRequestDto toString():  "+loginRequestDto);
 		
 		UsernamePasswordAuthenticationToken authenticationToken =
 				new UsernamePasswordAuthenticationToken(
 						loginRequestDto.getUsername(),
 						loginRequestDto.getPassword());
 		
-		System.out.println("JwtAuthenticationFilter: 토큰생성완료");
+		System.out.println("JwtAuthenticationFilter  =--> "
+				+ " UsernamePasswordAuthenticationToken :   authenticationToken: 토큰생성완료");
 		
+		// 생성된 토큰 
+		//전달된 인증 개체를 인증하려고 시도하고 성공하면 완전히 채워진 인증 개체(허가된 권한 포함)를 반환합니다.
 		Authentication authentication = authenticationManager.authenticate(authenticationToken);
 		
+		//getPrincipal();
+		//인증 중인 보안 주체의 ID입니다. 사용자 이름과 암호가 포함된 인증 요청의 경우 사용자 이름이 됩니다. 
+		//호출자는 인증 요청을 위해 주체를 채울 것으로 예상됩니다.
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println("Authentication: "+principalDetails.getUser().getUsername());
+		System.out.println("Authentication 의 principalDetails.getUser().getUsername()의 내용: "+principalDetails.getUser().getUsername());
 		
 		return authentication;
 	}
@@ -65,6 +72,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
 		
+		System.out.println("principalDetails.getUsername() : 내용" + principalDetails.getUsername());
+		
 		String jwtToken = JWT.create()
 				.withSubject(principalDetails.getUsername())
 				.withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.EXPIRATION_TIME))
@@ -73,6 +82,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.sign(Algorithm.HMAC512(JwtProperties.SECRET));
 				
 		response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX+jwtToken);
+		
+		/*
+		 * HMAC 알고리즘을 사용할 경우 서명은 다음과 같이 생성한다.
+    HMACSHA256(
+      base64UrlEncode(header) + "." +
+      base64UrlEncode(payload),
+      your-256-bit-secret
+    )
+		 * 
+		 */
+		
 		
 		ObjectMapper om = new ObjectMapper();
 		
