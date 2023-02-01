@@ -17,6 +17,7 @@ import com.and4.travel_server.service.UserService;
 @Configuration
 
 //스프링시큐리티 사용을 위한 어노테이션선언
+//스프링시큐리티 사용을 위한 어노테이션선언
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
