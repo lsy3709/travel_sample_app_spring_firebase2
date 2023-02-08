@@ -21,8 +21,8 @@
 	</delete>
 	<!-- 일기작성 -->
 	<insert id="insertDiary">
-		insert into diary(title,content,date,on_off)
-		values(#{title},#{content},#{date},#{on_off})
+		insert into diary(title,content,date,on_off,trip_id,image_uri)
+		values(#{title},#{content},#{date},#{on_off},#{trip_id},#{image_uri})
 	</insert>
 	
 	

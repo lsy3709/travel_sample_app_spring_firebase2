@@ -52,7 +52,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 						loginRequestDto.getPassword());
 		
 		System.out.println("JwtAuthenticationFilter  =--> "
-				+ " UsernamePasswordAuthenticationToken :   authenticationToken: 토큰생성완료");
+				+ " UsernamePasswordAuthenticationToken :   authenticationToken: 객생성완료");
 		
 		// 생성된 토큰 
 		//전달된 인증 개체를 인증하려고 시도하고 성공하면 완전히 채워진 인증 개체(허가된 권한 포함)를 반환합니다.
@@ -70,10 +70,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			FilterChain chain, Authentication authResult) throws IOException, ServletException {
-		
+		System.out.println("successfulAuthentication 진입");
 		PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
 		
-		System.out.println("principalDetails.getUsername() : 내용" + principalDetails.getUsername());
+		System.out.println("successfulAuthentication principalDetails.getUsername() : 내용" + principalDetails.getUsername());
 		
 		String jwtToken = JWT.create()
 				.withSubject(principalDetails.getUsername())
@@ -94,6 +94,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		 * 
 		 */
 		
+		System.out.println("successfulAuthentication jwtToken : 내용 : " + jwtToken);
 		
 		ObjectMapper om = new ObjectMapper();
 		
@@ -102,7 +103,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		cmRequestDto.setPassword(principalDetails.getUser().getPassword());
 		
 		String cmRequestDtoJson = om.writeValueAsString(cmRequestDto);
-		
+		System.out.println("om.writeValueAsString(cmRequestDto); 내용 : " + cmRequestDtoJson);
 		PrintWriter out = response.getWriter();
 		out.print(cmRequestDtoJson);
 		out.flush();

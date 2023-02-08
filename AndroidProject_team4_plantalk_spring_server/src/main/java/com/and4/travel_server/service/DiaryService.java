@@ -5,7 +5,7 @@ import java.util.List;
 import com.and4.travel_server.model.Diary;
 
 public interface DiaryService {
-	public String insertDiary(Diary diary);
+	public void insertDiary(Diary diary);
 
 	public List<Diary> doGetDiaryList();
 

@@ -15,9 +15,9 @@ public class DiaryServiceImpl implements DiaryService {
 	private DiaryMapper diaryMapper;
 
 	@Override
-	public String insertDiary(Diary diary) {
+	public void insertDiary(Diary diary) {
 		
-		return diaryMapper.insertDiary(diary);
+		diaryMapper.insertDiary(diary);
 	}
 
 	@Override

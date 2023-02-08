@@ -24,9 +24,13 @@ public class DiaryController {
 
 	
 	@PostMapping("diaryinsert")
-	public String insertDiary(@RequestBody Diary diary) {
+	public void insertDiary(@RequestBody Diary diary) {
+		System.out.println("diary.getTitle(): "+diary.getTitle());
+		System.out.println("diary.getTrip_id(): "+diary.getTrip_id());
+		System.out.println("diary.getImage_uri(): "+diary.getImage_uri());
+		
 		diaryService.insertDiary(diary);
-		return "datasave";
+		//return "datasave";
 	}
 	
 	@GetMapping("diaryList")
