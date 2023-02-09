@@ -21,8 +21,8 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
 	@Override
-	public List<Diary> doGetDiaryList() {
-		return diaryMapper.doGetDiaryList();
+	public List<Diary> doGetDiaryList(String trip_id) {
+		return diaryMapper.doGetDiaryList(trip_id);
 	}
 
 	@Override

@@ -33,10 +33,10 @@ public class DiaryController {
 		//return "datasave";
 	}
 	
-	@GetMapping("diaryList")
-	public Map<String,List<Diary>> doGetDiaryList(){
+	@GetMapping("diaryList/{trip_id}")
+	public Map<String,List<Diary>> doGetDiaryList(@PathVariable("trip_id") String trip_id){
 		Map<String,List<Diary>> map = new HashMap<String,List<Diary>>();
-		map.put("diarys",diaryService.doGetDiaryList());
+		map.put("diarys",diaryService.doGetDiaryList(trip_id));
 		return map;
 	}
 	
@@ -45,6 +45,11 @@ public class DiaryController {
 		Map<String,List<Diary>> map = new HashMap<String,List<Diary>>();
 		map.put("diarys",diaryService.doGetTripDiaryList());
 		return map;
+	}
+	//diaryupdate
+	@PostMapping("diaryupdate/{trip_id}")
+	public void diaryupdate(@PathVariable("trip_id") String trip_id) {
+		diaryService.diaryupdate(trip_id);
 	}
 	
 	@PostMapping("diaryListDelete/{dno}")
