@@ -14,4 +14,5 @@ public class Diary {
 	private int good;
 	private String trip_id;
 	private String image_uri;
+	private String video_uri;
 }

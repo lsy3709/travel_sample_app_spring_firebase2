@@ -25,9 +25,10 @@ public class DiaryController {
 	
 	@PostMapping("diaryinsert")
 	public void insertDiary(@RequestBody Diary diary) {
-		System.out.println("diary.getTitle(): "+diary.getTitle());
-		System.out.println("diary.getTrip_id(): "+diary.getTrip_id());
-		System.out.println("diary.getImage_uri(): "+diary.getImage_uri());
+//		System.out.println("diary.getTitle(): "+diary.getTitle());
+//		System.out.println("diary.getTrip_id(): "+diary.getTrip_id());
+//		System.out.println("diary.getImage_uri(): "+diary.getImage_uri());
+		//System.out.println("diary.getVideo_uri(): "+diary.getVideo_uri());
 		
 		diaryService.insertDiary(diary);
 		//return "datasave";
@@ -47,9 +48,9 @@ public class DiaryController {
 		return map;
 	}
 	//diaryupdate
-	@PostMapping("diaryupdate/{trip_id}")
-	public void diaryupdate(@PathVariable("trip_id") String trip_id) {
-		diaryService.diaryupdate(trip_id);
+	@PostMapping("diaryupdate")
+	public void diaryupdate(@RequestBody Diary diary) {
+		diaryService.diaryupdate(diary);
 	}
 	
 	@PostMapping("diaryListDelete/{dno}")

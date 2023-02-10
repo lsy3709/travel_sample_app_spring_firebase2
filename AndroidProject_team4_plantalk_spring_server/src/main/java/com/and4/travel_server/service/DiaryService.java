@@ -12,6 +12,8 @@ public interface DiaryService {
 	public List<Diary> doGetTripDiaryList();
 
 	public void deleteDiaryList(int dno);
+	
+	public void diaryupdate(Diary diary);
 
 	public void findByDno(int dno);
 

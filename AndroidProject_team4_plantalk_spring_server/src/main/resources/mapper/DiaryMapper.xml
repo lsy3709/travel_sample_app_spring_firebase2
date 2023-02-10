@@ -21,9 +21,14 @@
 	</delete>
 	<!-- 일기작성 -->
 	<insert id="insertDiary">
-		insert into diary(title,content,date,on_off,trip_id,image_uri)
-		values(#{title},#{content},#{date},#{on_off},#{trip_id},#{image_uri})
+		insert into diary(title,content,date,on_off,trip_id,image_uri,video_uri)
+		values(#{title},#{content},#{date},#{on_off},#{trip_id},#{image_uri},#{video_uri})
 	</insert>
+	
+	<update id="updateDiary">
+		update diary set title = #{title}, content = #{content}, date = #{date}, on_off=#{on_off},trip_id=#{trip_id}, image_uri=#{image_uri} 
+		where dno=#{dno}
+	</update>
 	
 	
 	<select id="getDiary" resultType="com.and4.travel_server.model.Diary">

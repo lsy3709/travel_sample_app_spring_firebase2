@@ -11,6 +11,8 @@ public interface DiaryMapper {
 	
 	public void insertDiary(Diary diary);
 	
+	public void updateDiary(Diary diary);
+	
 	public List<Diary> doGetDiaryList(String tip_id);
 	
 	public List<Diary> doGetTripDiaryList();

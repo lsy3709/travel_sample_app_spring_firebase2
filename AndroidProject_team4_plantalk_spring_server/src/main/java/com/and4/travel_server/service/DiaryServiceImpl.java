@@ -41,5 +41,10 @@ public class DiaryServiceImpl implements DiaryService {
 		diaryMapper.findByDno(dno);
 	}
 
+	@Override
+	public void diaryupdate(Diary diary) {
+		diaryMapper.updateDiary(diary);
+	}
+
 	
 }
