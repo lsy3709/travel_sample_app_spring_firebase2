@@ -27,8 +27,8 @@ public class DiaryController {
 	public void insertDiary(@RequestBody Diary diary) {
 //		System.out.println("diary.getTitle(): "+diary.getTitle());
 //		System.out.println("diary.getTrip_id(): "+diary.getTrip_id());
-//		System.out.println("diary.getImage_uri(): "+diary.getImage_uri());
-		//System.out.println("diary.getVideo_uri(): "+diary.getVideo_uri());
+		System.out.println("diary.getImage_uri(): "+diary.getImage_uri().length());
+		System.out.println("diary.getVideo_uri(): "+diary.getVideo_uri().length());
 		
 		diaryService.insertDiary(diary);
 		//return "datasave";

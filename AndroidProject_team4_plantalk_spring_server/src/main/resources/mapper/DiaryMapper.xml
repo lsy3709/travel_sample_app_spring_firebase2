@@ -26,8 +26,8 @@
 	</insert>
 	
 	<update id="updateDiary">
-		update diary set title = #{title}, content = #{content}, date = #{date}, on_off=#{on_off},trip_id=#{trip_id}, image_uri=#{image_uri} 
-		where dno=#{dno}
+		update diary set title = #{title}, content = #{content}, date = #{date}, on_off=#{on_off},trip_id=#{trip_id}, 
+		image_uri=#{image_uri}, video_uri=#{video_uri} where dno=#{dno}
 	</update>
 	
 	
