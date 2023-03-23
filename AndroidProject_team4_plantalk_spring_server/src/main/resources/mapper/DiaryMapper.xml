@@ -6,7 +6,7 @@
 
 <mapper namespace="com.and4.travel_server.mapper.DiaryMapper">
 	
-	<!-- 내일기 클릭 -->
+	<!-- 내일기 클릭 2-->
 	<select id="doGetDiaryList" resultType="com.and4.travel_server.model.Diary">
 		select * from diary where on_off='비공개' and trip_id = #{trip_id}
 	</select>
